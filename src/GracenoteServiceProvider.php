@@ -19,7 +19,7 @@ class GracenoteServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {      
+    {
         $this->publishes([
             __DIR__.'/config/laravel-gracenote.php' => config_path('laravel-gracenote.php'),
         ], 'config');
@@ -43,7 +43,7 @@ class GracenoteServiceProvider extends ServiceProvider
 
     private function registerSkeleton()
     {
-        $this->app->bind('gracenote',function($app){
+        $this->app->bind('gracenote', function ($app) {
             return new Gracenote($app);
         });
     }

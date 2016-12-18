@@ -5,11 +5,10 @@ use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
 
 class Gracenote
 {
-
     private $client_id;
     private $client_tag;
     private $user_id;
-    private $request_url; 
+    private $request_url;
 
     public $query_cmd;
     public $lang;
@@ -80,7 +79,7 @@ class Gracenote
         $auth= "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
         $search = '<TEXT TYPE="'.strtoupper($this->search_type).'">'.$this->search_terms.'</TEXT>';
         $query = '<QUERY CMD="'.$this->query_cmd.'">'.$search.'</QUERY>';
-        $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>"; 
+        $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>";
         
         return $payload;
     }
@@ -91,15 +90,15 @@ class Gracenote
      */
     private function setParameters()
     {
-        if(empty(config('laravel-gracenote.client_id'))){
+        if (empty(config('laravel-gracenote.client_id'))) {
             throw RequiredConfigMissing::cantFindClientId();
         }
 
-        if(empty(config('laravel-gracenote.client_tag'))){
+        if (empty(config('laravel-gracenote.client_tag'))) {
             throw RequiredConfigMissing::cantFindClientTag();
         }
 
-        if(empty(config('laravel-gracenote.user_id'))){
+        if (empty(config('laravel-gracenote.user_id'))) {
             throw RequiredConfigMissing::cantFindUserId();
         }
 
