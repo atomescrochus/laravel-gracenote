@@ -1,5 +1,4 @@
 <?php
-
 namespace Atomescrochus\Gracenote;
 
 use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
@@ -7,35 +6,90 @@ use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
 class Gracenote
 {
 
-    public $client_id;
-    public $client_tag;
-    public $user_id;
+    private $client_id;
+    private $client_tag;
+    private $user_id;
+    private $request_url; 
 
-    /**
-     * Create a new Skeleton Instance
-     */
+    public $query_cmd;
+    public $lang;
+    public $search_type;
+    public $search_terms;
+
     public function __construct()
     {
-        $this->setGracenoteKeys();
+        $this->setParameters();
+
+        $this->lang = "eng";
+        $this->search_terms = "";
+        $this->query_cmd = "album_search"; // curently only possible option.
+        $this->search_type = "TRACK_TITLE";
     }
 
     /**
-     * Friendly welcome
-     *
-     * @param string $phrase Phrase to return
-     *
-     * @return string Returns the phrase passed in
+     * Set the "prefered natural language of metadata"
+     * @param  string $type One of the search type as defined by Gracenote API docs.
      */
-    public function echoPhrase($phrase)
+    public function searchType($type)
     {
-        return $phrase;
+        $this->search_type = $type;
+        return $this;
+    }
+
+    /**
+     * Set the "prefered natural language of metadata"
+     * @param  string $lang A three-character language code as defined by ISO 639-2
+     */
+    public function lang($lang)
+    {
+        $this->lang = $lang;
+        return $this;
+    }
+
+    /**
+     * Set the query to send to Gracenote
+     * @param  string $query The search query
+     */
+    public function query($query)
+    {
+        $this->search_terms = $query;
+        return $this;
+    }
+
+    /**
+     * Sends the search
+     * @return collection A collection of results
+     */
+    public function search()
+    {
+        $response = \Httpful\Request::post($this->request_url)
+        ->body($this->xmlPayload())
+        ->sendsXml()
+        ->send();
+        
+        $results = collect($response->body->RESPONSE[0]->ALBUM);
+        return $results;
+    }
+
+    /**
+     * Sets the XML payload
+     */
+    private function xmlPayload()
+    {
+        $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
+        $auth= "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
+        $search = '<TEXT TYPE="'.strtoupper($this->search_type).'">'.$this->search_terms.'</TEXT>';
+        $query = '<QUERY CMD="'.$this->query_cmd.'">'.$search.'</QUERY>';
+        $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>"; 
+        
+        return $payload;
     }
 
     /**
      * This will try to set required information to be found in config/env file,
      * and throw an exception if nothing is found.
      */
-    private function setGracenoteKeys()
+    private function setParameters()
     {
         if(empty(config('laravel-gracenote.client_id'))){
             throw RequiredConfigMissing::cantFindClientId();
@@ -52,5 +106,6 @@ class Gracenote
         $this->client_id = config('laravel-gracenote.client_id');
         $this->client_tag = config('laravel-gracenote.client_tag');
         $this->user_id = config('laravel-gracenote.user_id');
+        $this->request_url = "https://c{$this->client_id}.web.cddbp.net/webapi/json/1.0/";
     }
 }

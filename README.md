@@ -33,18 +33,17 @@ You should check the published config file for values to add to your environment
 
 ``` php
 $gracenote = new Atomescrochus\Gracenote();
-echo $gracenote->echoPhrase('Hello world!');
+
+// $results will be a collection of the results
+$results = $gracenote->lang('eng')
+    ->searchType('track_title')
+    ->query('Poker face')
+    ->search();
 ```
 
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
 
 ## Contributing
 
