@@ -1,10 +1,8 @@
 # Changelog
 
-All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file.
+All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
-Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
-
-## NEXT - YYYY-MM-DD
+## UNRELEASED - YYYY-MM-DD
 
 ### Added
 - Nothing
@@ -20,3 +18,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Security
 - Nothing
+
+## 0.1.0 - 2016-12-18
+
+### Added
+- Layed the base of the package, we can now search for results in Gracenote via their WebAPI, see readme for the how to.
+- Publishing to packagist for testing purpose.
