@@ -1,14 +1,8 @@
 # Interact with the Gracenote Web API
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
+WIP: do not use yet.
 
 The `atomescrochys/laravel-gracenote` package provide and easy way to interact with the Gracenote Web API from any Laravel 5.3 application.
-
 
 ## Install
 
@@ -38,8 +32,8 @@ You should check the published config file for values to add to your environment
 ## Usage
 
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+$gracenote = new Atomescrochus\Gracenote();
+echo $gracenote->echoPhrase('Hello world!');
 ```
 
 ## Change log
