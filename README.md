@@ -33,6 +33,8 @@ You will have to publish the configuration files also:
 php artisan vendor:publish --provider="Atomescrochus\Gracenote\GracenoteServiceProvider" --tag="config"
 ```
 
+You should check the published config file for values to add to your environment file.
+
 ## Usage
 
 ``` php
