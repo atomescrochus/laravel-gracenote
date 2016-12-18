@@ -1,5 +1,10 @@
 # Interact with the Gracenote Web API
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![StyleCI](https://styleci.io/repos/76792572/shield?branch=master)](https://styleci.io/repos/76792572)
+[![Total Downloads][ico-downloads]][link-downloads]
+
 WIP: not ready for production yet.
 
 The `atomescrochys/laravel-gracenote` package provide and easy way to interact with the Gracenote Web API from any Laravel 5.3 application.
