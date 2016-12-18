@@ -1,6 +1,6 @@
 # Interact with the Gracenote Web API
 
-WIP: do not use yet.
+WIP: not ready for production yet.
 
 The `atomescrochys/laravel-gracenote` package provide and easy way to interact with the Gracenote Web API from any Laravel 5.3 application.
 
