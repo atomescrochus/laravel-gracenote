@@ -19,6 +19,11 @@ All Notable changes to `atomescrochus/laravel-gracenote` will be documented in t
 ### Security
 - Nothing
 
+## 0.2.0 - 2016-12-19
+
+### Added
+- Added facade.
+
 ## 0.1.0 - 2016-12-18
 
 ### Added

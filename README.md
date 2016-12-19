@@ -17,13 +17,18 @@ You can install this package via composer:
 $ composer require atomescrochus/laravel-gracenote
 ```
 
-Then you have to install the package' service provider:
+Then you have to install the package' service provider and aliase:
 
 ```php
 // config/app.php
 'providers' => [
     ...
     Atomescrochus\Gracenote\GracenoteServiceProvider::class,
+];
+
+'aliases' => [
+	....
+    'GracenoteAPI' => Atomescrochus\Gracenote\Facades\Gracenote::class,
 ];
 ```
 
@@ -37,10 +42,8 @@ You should check the published config file for values to add to your environment
 ## Usage
 
 ``` php
-$gracenote = new Atomescrochus\Gracenote();
-
 // $results will be a collection of the results
-$results = $gracenote->lang('eng')
+$results = GracenoteAPI::lang('eng')
     ->searchType('track_title')
     ->query('Poker face')
     ->search();

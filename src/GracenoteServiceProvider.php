@@ -2,6 +2,7 @@
 
 namespace Atomescrochus\Gracenote;
 
+use Atomescrochus\Gracenote\Gracenote;
 use Illuminate\Support\ServiceProvider;
 
 class GracenoteServiceProvider extends ServiceProvider
@@ -43,8 +44,8 @@ class GracenoteServiceProvider extends ServiceProvider
 
     private function registerSkeleton()
     {
-        $this->app->bind('gracenote', function ($app) {
-            return new Gracenote($app);
+        $this->app->bind('gracenote', function () {
+            return new Gracenote();
         });
     }
 }
