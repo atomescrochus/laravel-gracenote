@@ -2,6 +2,26 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## Unreleased - YYYY-MM-DD
+
+### Added
+- Method to format the results of a search by track title;
+- Method to format the results of a search by album title;
+- Method to format the results of a search by artist;
+- Results returned by a search includes raw results and a collection formatted results;
+
+### Deprecated
+- Nothing
+
+### Fixed
+- The cache key for a search item now includes the search type so same search terms on multiple type don't conflicts.
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
 ## 0.3.0 - 2016-12-19
 
 ### Added

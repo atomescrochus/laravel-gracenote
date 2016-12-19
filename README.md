@@ -50,12 +50,12 @@ GRACENOTE_USER_ID=wxyz-9876
 ## Usage
 
 ``` php
-// $results will be a collection of the results
-$results = GracenoteAPI::lang('eng')
-    ->cache(120)
-    ->searchType('track_title')
-    ->query('Poker face')
-    ->search();
+// $results will be an object containing a collection of results and raw response data from Gracenote
+$results = GracenoteAPI::lang('eng') // natural language of metadata
+    ->cache(120) // integer representing minutes to cache results for
+    ->searchType('track_title') //either 'track_title', 'album_title', or 'artist'
+    ->query('Poker face') // the search query
+    ->search(); // do some magic
 ```
 
 ## Change log

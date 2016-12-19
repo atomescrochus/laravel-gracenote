@@ -73,7 +73,7 @@ class Gracenote
      */
     public function search()
     {
-        $results = Cache::remember($this->search_terms, $this->cache, function () {
+        $results = Cache::remember("{$this->search_type}-{$this->search_terms}", $this->cache, function () {
             return $this->searchGracenote();
         });
 
@@ -90,10 +90,194 @@ class Gracenote
         ->body($this->xmlPayload())
         ->sendsXml()
         ->send();
-        
-        $results = collect($response->body->RESPONSE[0]->ALBUM);
 
-        return $results;
+        return $this->formatApiResults($response);
+    }
+
+    private function formatApiResults($results)
+    {
+        
+        $raw = $results->raw_body;
+
+        if($this->search_type == "track_title"){
+            $albums = $this->formatSearchTrackTitle($results->body->RESPONSE[0]->ALBUM);
+        }
+
+        if($this->search_type == "album_title"){
+            $albums = $this->formatSearchAlbumTitle($results->body->RESPONSE[0]->ALBUM);
+        }
+
+        if($this->search_type == "artist"){
+            $albums = $this->formatSearchArtist($results->body->RESPONSE[0]->ALBUM);
+        }
+
+        return (object) [
+            'results' => $albums,
+            'raw' => json_decode($raw),
+        ];
+    }
+
+    private function formatSearchArtist($raw_albums)
+    {
+        return collect($raw_albums)->map(function ($item, $key) {
+           $formatted = (object) [];
+           
+           if(isset($item->GN_ID)){
+                $formatted->gracenote_album_id = $item->GN_ID;
+            }
+
+            if(isset($item->TITLE[0]->VALUE)){
+                $formatted->album_title = $item->TITLE[0]->VALUE;
+            }
+
+            if(isset($item->ARTIST[0]->VALUE)){
+                $formatted->album_artist = $item->ARTIST[0]->VALUE;
+            }
+
+            if(isset($item->GENRE[0]->VALUE)){
+                $formatted->album_genre = $item->GENRE[0]->VALUE;
+            }
+
+            if(isset($item->DATE[0]->VALUE)){
+                $formatted->album_year = $item->DATE[0]->VALUE;
+            }
+
+            if(isset($item->TRACK_COUNT)){
+                $formatted->track_count = $item->TRACK_COUNT;
+            }
+
+            if(isset($item->TRACK)){
+                $formatted->tracks = collect($item->TRACK)->map(function ($item, $key) {
+                    $formatted = (object) [];
+                    if(isset($item->TRACK_NUM)){
+                        $formatted->track_number = $item->TRACK_NUM;
+                    }
+
+                    if(isset($item->GN_ID)){
+                        $formatted->gracenote_track_id = $item->GN_ID;
+                    }
+
+                    if(isset($item->ARTIST[0]->VALUE)){
+                        $formatted->artist = $item->ARTIST[0]->VALUE;
+                    }
+
+                    if(isset($item->TITLE[0]->VALUE)){
+                        $formatted->title = $item->TITLE[0]->VALUE;
+                    }
+
+                    return $formatted;
+
+                })->toArray();
+            }
+
+            return $formatted;
+
+        });
+    }
+
+    private function formatSearchAlbumTitle($raw_albums)
+    {
+
+        return collect($raw_albums)->map(function ($item, $key) {
+           $formatted = (object) [];
+           
+           if(isset($item->GN_ID)){
+                $formatted->gracenote_album_id = $item->GN_ID;
+            }
+
+            if(isset($item->TITLE[0]->VALUE)){
+                $formatted->album_title = $item->TITLE[0]->VALUE;
+            }
+
+            if(isset($item->ARTIST[0]->VALUE)){
+                $formatted->album_artist = $item->ARTIST[0]->VALUE;
+            }
+
+            if(isset($item->GENRE[0]->VALUE)){
+                $formatted->album_genre = $item->GENRE[0]->VALUE;
+            }
+
+            if(isset($item->DATE[0]->VALUE)){
+                $formatted->album_year = $item->DATE[0]->VALUE;
+            }
+
+            if(isset($item->TRACK_COUNT)){
+                $formatted->track_count = $item->TRACK_COUNT;
+            }
+
+            if(isset($item->TRACK)){
+                $formatted->tracks = collect($item->TRACK)->map(function ($item, $key) {
+                    $formatted = (object) [];
+                    if(isset($item->TRACK_NUM)){
+                        $formatted->track_number = $item->TRACK_NUM;
+                    }
+
+                    if(isset($item->GN_ID)){
+                        $formatted->gracenote_track_id = $item->GN_ID;
+                    }
+
+                    if(isset($item->ARTIST[0]->VALUE)){
+                        $formatted->artist = $item->ARTIST[0]->VALUE;
+                    }
+
+                    if(isset($item->TITLE[0]->VALUE)){
+                        $formatted->title = $item->TITLE[0]->VALUE;
+                    }
+
+                    return $formatted;
+
+                })->toArray();
+            }
+
+            return $formatted;
+
+        });
+    }
+
+    private function formatSearchTrackTitle($raw_albums)
+    {
+        return collect($raw_albums)->map(function ($item, $key){
+            $formatted = (object) [];
+
+            if(isset($item->GN_ID))
+                {
+                $formatted->gracenote_album_id = $item->GN_ID;
+            }
+
+            if(isset($item->TITLE[0]->VALUE))
+                {
+                $formatted->album_title = $item->TITLE[0]->VALUE;
+            }
+
+            if(isset($item->ARTIST[0]->VALUE))
+                {
+                $formatted->album_artist = $item->ARTIST[0]->VALUE;
+            }
+
+            if(isset($item->GENRE[0]->VALUE))
+                {
+                $formatted->album_genre = $item->GENRE[0]->VALUE;
+            }
+
+            if(isset($item->DATE[0]->VALUE))
+                {
+                $formatted->album_year = $item->DATE[0]->VALUE;
+            }
+
+            if(isset($item->TRACK[0]->TRACK_NUM)){
+                $formatted->track_number = $item->TRACK[0]->TRACK_NUM;
+            }
+
+            if(isset($item->TRACK[0]->GN_ID)){
+                $formatted->gracenote_track_id = $item->TRACK[0]->GN_ID;
+            }
+
+            if(isset($item->TRACK[0]->TITLE)){
+                $formatted->track_title = $item->TRACK[0]->TITLE[0]->VALUE;
+            }
+
+            return $formatted;
+        });
     }
 
     /**
