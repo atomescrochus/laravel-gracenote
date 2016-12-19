@@ -2,6 +2,7 @@
 namespace Atomescrochus\Gracenote;
 
 use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
+use Illuminate\Support\Facades\Cache;
 
 class Gracenote
 {
@@ -14,6 +15,7 @@ class Gracenote
     public $lang;
     public $search_type;
     public $search_terms;
+    public $cache;
 
     public function __construct()
     {
@@ -23,6 +25,16 @@ class Gracenote
         $this->search_terms = "";
         $this->query_cmd = "album_search"; // curently only possible option.
         $this->search_type = "TRACK_TITLE";
+    }
+
+    /**
+     * Sets the time in minutes to cache the search results
+     * @param  integer $cache A number of minutes
+     */
+    public function cache(int $cache)
+    {
+        $this->cache = $cache;
+        return $this;
     }
 
     /**
@@ -61,12 +73,26 @@ class Gracenote
      */
     public function search()
     {
+        $results = Cache::remember($this->search_terms, $this->cache, function () {
+            return $this->searchGracenote();
+        });
+
+        return $results;
+    }
+
+    /**
+     * Send a request for search to Gracenote WebAPI
+     * @return collection A collection of results
+     */
+    private function searchGracenote()
+    {
         $response = \Httpful\Request::post($this->request_url)
         ->body($this->xmlPayload())
         ->sendsXml()
         ->send();
         
         $results = collect($response->body->RESPONSE[0]->ALBUM);
+
         return $results;
     }
 
@@ -102,6 +128,7 @@ class Gracenote
             throw RequiredConfigMissing::cantFindUserId();
         }
 
+        $this->cache = empty(config('laravel-gracenote.cache')) ? 60 : config('laravel-gracenote.cache');
         $this->client_id = config('laravel-gracenote.client_id');
         $this->client_tag = config('laravel-gracenote.client_tag');
         $this->user_id = config('laravel-gracenote.user_id');

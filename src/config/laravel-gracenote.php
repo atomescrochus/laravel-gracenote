@@ -12,4 +12,9 @@ return [
      * You will have to get it by yourself, for now.
      */
     'user_id' => env('GRACENOTE_USER_ID'),
+
+    /**
+     * By default, the cache is set to 60 minutes
+     */
+    'cache' => 60,
 ];

@@ -44,6 +44,7 @@ You should check the published config file for values to add to your environment
 ``` php
 // $results will be a collection of the results
 $results = GracenoteAPI::lang('eng')
+    ->cache(120)
     ->searchType('track_title')
     ->query('Poker face')
     ->search();

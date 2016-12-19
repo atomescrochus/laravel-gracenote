@@ -2,6 +2,23 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## Unreleased - YYYY-MM-DD
+
+### Added
+- Results now gets cached for a default time of 60 minutes, but time can be changed via `cache()` method.
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Nothing
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
 ## 0.2.0 - 2016-12-19
 
 ### Added
@@ -13,7 +30,7 @@ All Notable changes to `atomescrochus/laravel-gracenote` will be documented in t
 - Layed the base of the package, we can now search for results in Gracenote via their WebAPI, see readme for the how to.
 - Publishing to packagist for testing purpose.
 
-## UNRELEASED - YYYY-MM-DD
+## Template - YYYY-MM-DD
 
 ### Added
 - Nothing
