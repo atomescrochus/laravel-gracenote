@@ -2,7 +2,7 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
-## Unreleased - YYYY-MM-DD
+## 1.0.0 - 2016-12-19
 
 ### Added
 - Method to format the results of a search by track title.

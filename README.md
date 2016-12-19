@@ -45,7 +45,7 @@ GRACENOTE_CLIENT_TAG=abcdefg12345678
 GRACENOTE_USER_ID=wxyz-9876
 ```
 
-**NOTE**: You will have to manually get your Gracenote user ID (you can see how in the documentation) for now. An upcoming version of this package will add an artisan command to fetch it for you.
+**NOTE**: If you don't have your Gracenote user id, you can get it by setting the `GRACENOTE_CLIENT_ID` and `GRACENOTE_CLIENT_TAG` value, then run `php artisan gracenote:user-id`. This will run the appropriate API call to fetch your user id so you can add it to your .env file.
 
 ## Usage
 
