@@ -2,6 +2,17 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## 0.2.0 - 2016-12-19
+
+### Added
+- Added facade.
+
+## 0.1.0 - 2016-12-18
+
+### Added
+- Layed the base of the package, we can now search for results in Gracenote via their WebAPI, see readme for the how to.
+- Publishing to packagist for testing purpose.
+
 ## UNRELEASED - YYYY-MM-DD
 
 ### Added
@@ -18,14 +29,3 @@ All Notable changes to `atomescrochus/laravel-gracenote` will be documented in t
 
 ### Security
 - Nothing
-
-## 0.2.0 - 2016-12-19
-
-### Added
-- Added facade.
-
-## 0.1.0 - 2016-12-18
-
-### Added
-- Layed the base of the package, we can now search for results in Gracenote via their WebAPI, see readme for the how to.
-- Publishing to packagist for testing purpose.
