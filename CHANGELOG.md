@@ -2,22 +2,10 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
-## Unreleased - YYYY-MM-DD
+## 0.3.0 - 2016-12-19
 
 ### Added
 - Results now gets cached for a default time of 60 minutes, but time can be changed via `cache()` method.
-
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
 
 ## 0.2.0 - 2016-12-19
 
