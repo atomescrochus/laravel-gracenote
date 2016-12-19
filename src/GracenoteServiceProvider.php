@@ -26,6 +26,12 @@ class GracenoteServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->mergeConfigFrom(__DIR__.'/config/laravel-gracenote.php', 'laravel-gracenote');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\GetGracenoteUserId::class,
+            ]);
+        }
     }
 
     /**
