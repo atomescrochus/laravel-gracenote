@@ -17,7 +17,7 @@ You can install this package via composer:
 $ composer require atomescrochus/laravel-gracenote
 ```
 
-Then you have to install the package' service provider and aliase:
+Then you have to install the package' service provider and alias:
 
 ```php
 // config/app.php
@@ -32,12 +32,20 @@ Then you have to install the package' service provider and aliase:
 ];
 ```
 
-You will have to publish the configuration files also:
+You will have to publish the configuration files also if you want to change the default value:
 ```bash
 php artisan vendor:publish --provider="Atomescrochus\Gracenote\GracenoteServiceProvider" --tag="config"
 ```
 
-You should check the published config file for values to add to your environment file.
+You are also required to put the values you can fetch in your Gracenote developer account in your .env files:
+
+```
+GRACENOTE_CLIENT_ID=12345678
+GRACENOTE_CLIENT_TAG=abcdefg12345678
+GRACENOTE_USER_ID=wxyz-9876
+```
+
+**NOTE**: You will have to manually get your Gracenote user ID (you can see how in the documentation) for now. An upcoming version of this package will add an artisan command to fetch it for you.
 
 ## Usage
 
@@ -64,8 +72,8 @@ If you discover any security related issues, please email jp@atomescroch.us inst
 
 ## Credits
 
-- [Jean-Philippe Murray][https://github.com/jpmurray]
-- [All Contributors][link-contributors]
+- [Jean-Philippe Murray](https://github.com/jpmurray)
+- [All Contributors](../../contributors)
 
 ## License
 
