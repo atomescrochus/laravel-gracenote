@@ -65,7 +65,7 @@ class GetGracenoteUserId extends Command
         ->body($payload)
         ->sendsXml()
         ->send();
-        if(!$response){
+        if (!$response) {
             $this->error("Something went wrong.");
         }
 
