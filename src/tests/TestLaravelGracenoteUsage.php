@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
 class TestLaravelGracenoteUsage extends TestCase
 {
     public function setUp()

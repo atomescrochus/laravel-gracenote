@@ -3,6 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/atomescrochus/laravel-gracenote/v/stable)](https://packagist.org/packages/atomescrochus/laravel-gracenote)
 [![License](https://poser.pugx.org/atomescrochus/laravel-gracenote/license)](https://packagist.org/packages/atomescrochus/laravel-gracenote)
 [![StyleCI](https://styleci.io/repos/76792572/shield?branch=master)](https://styleci.io/repos/76792572)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/atomescrochus/laravel-gracenote/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/atomescrochus/laravel-gracenote/?branch=master)
 [![Total Downloads](https://poser.pugx.org/atomescrochus/laravel-gracenote/downloads)](https://packagist.org/packages/atomescrochus/laravel-gracenote)
 
 The `atomescrochus/laravel-gracenote` package provide and easy way to interact with the Gracenote Web API from any Laravel 5.3 application.
