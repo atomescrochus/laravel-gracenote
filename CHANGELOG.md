@@ -6,9 +6,9 @@ All Notable changes to `atomescrochus/laravel-gracenote` will be documented in t
 
 ### Added
 - Note in comments for the artisan command to get user_id;
-- `getSearchType()`, `getQueryCmd()`, `getLang()`, `getCache()` to help with testing;
 - Added exception for missing search terms before searching the API;
 - Added exception for usage errors (wrong search type) while setting correspondent value;
+- Added some tests
 
 ### Deprecated
 - Nothing

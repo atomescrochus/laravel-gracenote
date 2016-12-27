@@ -1,7 +1,9 @@
 <?php
 namespace Atomescrochus\Gracenote;
 
+use Atomescrochus\Gracenote\Exceptions\MissingRequiredParameters;
 use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
+use Atomescrochus\Gracenote\Exceptions\UsageErrors;
 use Illuminate\Support\Facades\Cache;
 
 class Gracenote
@@ -16,15 +18,17 @@ class Gracenote
     public $search_type;
     public $search_terms;
     public $cache;
+    public $possible_search_types;
 
     public function __construct()
     {
         $this->setParameters();
 
         $this->lang = "eng";
-        $this->search_terms = "";
+        $this->search_terms = null;
         $this->query_cmd = "album_search"; // curently only possible option.
         $this->search_type = "TRACK_TITLE";
+        $this->possible_search_types = ['track_title', 'album_title', 'artist'];
     }
 
     /**
@@ -43,6 +47,10 @@ class Gracenote
      */
     public function searchType($type)
     {
+        if(!in_array($type, $this->possible_search_types)){
+            throw UsageErrors::searchType();
+        }
+
         $this->search_type = $type;
         return $this;
     }
@@ -73,6 +81,10 @@ class Gracenote
      */
     public function search()
     {
+        if(is_null($this->search_terms)){
+            throw MissingRequiredParameters::searchTerms();
+        }
+
         $results = Cache::remember("{$this->search_type}-{$this->search_terms}", $this->cache, function () {
             return $this->searchGracenote();
         });

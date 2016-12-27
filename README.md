@@ -58,6 +58,10 @@ $results = GracenoteAPI::lang('eng') // natural language of metadata
     ->search(); // do some magic
 ```
 
+## Tests
+
+Some tests are provided. I don't think it's as extensive as it could be, but it shows expected behavior works well, assuming that Gracenote API is responding. The tests are also thought to be ran while the package is installed in Laravel, and not standalone. If anyone wants to improve on the current test, please do!
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
