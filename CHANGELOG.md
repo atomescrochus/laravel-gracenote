@@ -2,25 +2,13 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
-## Unreleased - YYYY-MM-DD
+## 1.1.0 - 2016-12-27
 
 ### Added
 - Note in comments for the artisan command to get user_id;
 - Added exception for missing search terms before searching the API;
 - Added exception for usage errors (wrong search type) while setting correspondent value;
-- Added some tests
-
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
+- Added some tests.
 
 ## 1.0.0 - 2016-12-19
 
