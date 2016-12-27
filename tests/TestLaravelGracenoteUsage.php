@@ -1,7 +1,5 @@
 <?php
 
-namespace Atomescrochus\Gracenote\tests;
-
 class TestLaravelGracenoteUsage extends TestCase
 {
     public function setUp()
