@@ -1,5 +1,7 @@
 <?php
 
+namespace Atomescrochus\Gracenote\tests;
+
 class TestLaravelGracenoteUsage extends TestCase
 {
     public function setUp()
@@ -131,7 +133,7 @@ class TestLaravelGracenoteUsage extends TestCase
         $gracenote->searchType('track_title');
         $gracenote->query('poker face');
         $cache_key = "track_title-poker face";
-        $search_and_cache = $gracenote->search();
+        $gracenote->search();
 
         $this->assertTrue(Cache::has($cache_key));
 
