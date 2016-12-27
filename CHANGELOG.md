@@ -2,6 +2,14 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## 1.1.1 - 2016-12-27
+
+### Fixed
+- Moved tests outside the `src` folder to the root of the package.
+
+### Removed
+- Support for PHP > `7.0`.
+
 ## 1.1.0 - 2016-12-27
 
 ### Added

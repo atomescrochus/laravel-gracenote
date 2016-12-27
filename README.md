@@ -8,7 +8,7 @@
 
 The `atomescrochus/laravel-gracenote` package provide and easy way to interact with the Gracenote Web API from any Laravel 5.3 application.
 
-This package is usable in production, but should still be considered a work in progress (contribution welcomed!).
+This package is usable in production, but should still be considered a work in progress (contribution welcomed!). It required PHP >= `7.0`.
 
 ## Install
 
