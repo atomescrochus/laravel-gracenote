@@ -2,7 +2,6 @@
 
 namespace Atomescrochus\Gracenote;
 
-use Atomescrochus\Gracenote\Gracenote;
 use Illuminate\Support\ServiceProvider;
 
 class GracenoteServiceProvider extends ServiceProvider
@@ -42,7 +41,7 @@ class GracenoteServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerSkeleton();
-        
+
         config([
                 'config/laravel-gracenote.php',
         ]);

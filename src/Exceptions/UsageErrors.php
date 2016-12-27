@@ -8,6 +8,6 @@ class UsageErrors extends Exception
 {
     public static function searchType()
     {
-        return new static("This search type is invalid.");
+        return new static('This search type is invalid.');
     }
 }

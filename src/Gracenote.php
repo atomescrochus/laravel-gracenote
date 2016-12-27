@@ -1,10 +1,11 @@
 <?php
+
 namespace Atomescrochus\Gracenote;
 
-use Atomescrochus\Gracenote\Exceptions\MissingRequiredParameters;
-use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
-use Atomescrochus\Gracenote\Exceptions\UsageErrors;
 use Illuminate\Support\Facades\Cache;
+use Atomescrochus\Gracenote\Exceptions\UsageErrors;
+use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
+use Atomescrochus\Gracenote\Exceptions\MissingRequiredParameters;
 
 class Gracenote
 {
@@ -24,64 +25,68 @@ class Gracenote
     {
         $this->setParameters();
 
-        $this->lang = "eng";
+        $this->lang = 'eng';
         $this->search_terms = null;
-        $this->query_cmd = "album_search"; // curently only possible option.
-        $this->search_type = "TRACK_TITLE";
+        $this->query_cmd = 'album_search'; // curently only possible option.
+        $this->search_type = 'TRACK_TITLE';
         $this->possible_search_types = ['track_title', 'album_title', 'artist'];
     }
 
     /**
-     * Sets the time in minutes to cache the search results
-     * @param  integer $cache A number of minutes
+     * Sets the time in minutes to cache the search results.
+     * @param  int $cache A number of minutes
      */
     public function cache(int $cache)
     {
         $this->cache = $cache;
+
         return $this;
     }
 
     /**
-     * Set the "prefered natural language of metadata"
+     * Set the "prefered natural language of metadata".
      * @param  string $type One of the search type as defined by Gracenote API docs.
      */
     public function searchType($type)
     {
-        if(!in_array($type, $this->possible_search_types)){
+        if (! in_array($type, $this->possible_search_types)) {
             throw UsageErrors::searchType();
         }
 
         $this->search_type = $type;
+
         return $this;
     }
 
     /**
-     * Set the "prefered natural language of metadata"
+     * Set the "prefered natural language of metadata".
      * @param  string $lang A three-character language code as defined by ISO 639-2
      */
     public function lang($lang)
     {
         $this->lang = $lang;
+
         return $this;
     }
 
     /**
-     * Set the query to send to Gracenote
+     * Set the query to send to Gracenote.
      * @param  string $query The search query
      */
     public function query($query)
     {
         $this->search_terms = $query;
+
         return $this;
     }
 
     /**
-     * Sends the search
+     * Sends the search.
      * @return collection A collection of results
      */
     public function search()
     {
-        if(is_null($this->search_terms)){
+        if (is_null($this->search_terms)) {
             throw MissingRequiredParameters::searchTerms();
         }
 
@@ -93,7 +98,7 @@ class Gracenote
     }
 
     /**
-     * Send a request for search to Gracenote WebAPI
+     * Send a request for search to Gracenote WebAPI.
      * @return collection A collection of results
      */
     private function searchGracenote()
@@ -110,15 +115,15 @@ class Gracenote
     {
         $raw = $results->raw_body;
 
-        if ($this->search_type == "track_title") {
+        if ($this->search_type == 'track_title') {
             $albums = $this->formatSearchTrackTitle($results->body->RESPONSE[0]->ALBUM);
         }
 
-        if ($this->search_type == "album_title") {
+        if ($this->search_type == 'album_title') {
             $albums = $this->formatSearchAlbumTitle($results->body->RESPONSE[0]->ALBUM);
         }
 
-        if ($this->search_type == "artist") {
+        if ($this->search_type == 'artist') {
             $albums = $this->formatSearchArtist($results->body->RESPONSE[0]->ALBUM);
         }
 
@@ -132,7 +137,7 @@ class Gracenote
     {
         return collect($raw_albums)->map(function ($item, $key) {
             $formatted = (object) [];
-           
+
             if (isset($item->GN_ID)) {
                 $formatted->gracenote_album_id = $item->GN_ID;
             }
@@ -188,7 +193,7 @@ class Gracenote
     {
         return collect($raw_albums)->map(function ($item, $key) {
             $formatted = (object) [];
-           
+
             if (isset($item->GN_ID)) {
                 $formatted->gracenote_album_id = $item->GN_ID;
             }
@@ -282,16 +287,16 @@ class Gracenote
     }
 
     /**
-     * Sets the XML payload
+     * Sets the XML payload.
      */
     private function xmlPayload()
     {
         $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
-        $auth= "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
+        $auth = "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
         $search = '<TEXT TYPE="'.strtoupper($this->search_type).'">'.$this->search_terms.'</TEXT>';
         $query = '<QUERY CMD="'.$this->query_cmd.'">'.$search.'</QUERY>';
         $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>";
-        
+
         return $payload;
     }
 

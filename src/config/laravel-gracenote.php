@@ -14,7 +14,7 @@ return [
      */
     'user_id' => env('GRACENOTE_USER_ID'),
 
-    /**
+    /*
      * By default, the cache is set to 60 minutes
      */
     'cache' => 60,
