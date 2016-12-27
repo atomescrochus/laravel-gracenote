@@ -8,6 +8,6 @@ class MissingRequiredParameters extends Exception
 {
     public static function searchTerms()
     {
-        return new static("We have no search terms to work with.");
+        return new static('We have no search terms to work with.');
     }
 }

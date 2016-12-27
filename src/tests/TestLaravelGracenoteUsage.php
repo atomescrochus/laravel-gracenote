@@ -10,7 +10,7 @@ class TestLaravelGracenoteUsage extends TestCase
     }
 
     /**
-     * Test if default required default attributes values are set
+     * Test if default required default attributes values are set.
      *
      * @return void
      */
@@ -40,7 +40,7 @@ class TestLaravelGracenoteUsage extends TestCase
     }
 
     /**
-     * Test if we can set a new cache time
+     * Test if we can set a new cache time.
      *
      * @return void
      */
@@ -53,7 +53,7 @@ class TestLaravelGracenoteUsage extends TestCase
     }
 
     /**
-     * Test if we can set a search type
+     * Test if we can set a search type.
      *
      * @return void
      */
@@ -66,21 +66,21 @@ class TestLaravelGracenoteUsage extends TestCase
     }
 
     /**
-     * Test if we throw an error on wrong sarch type
+     * Test if we throw an error on wrong sarch type.
      *
      * @return void
      */
     public function test_failed_search_type()
     {
         $this->expectException(\Atomescrochus\Gracenote\Exceptions\UsageErrors::class);
-        $this->expectExceptionMessage("This search type is invalid.");
+        $this->expectExceptionMessage('This search type is invalid.');
 
         $gracenote = new \Atomescrochus\Gracenote\Gracenote();
         $gracenote->searchType('this_is_wrong');
     }
 
     /**
-     * Test if we can set a new language
+     * Test if we can set a new language.
      *
      * @return void
      */
@@ -93,7 +93,7 @@ class TestLaravelGracenoteUsage extends TestCase
     }
 
     /**
-     * Test if we can set a search query
+     * Test if we can set a search query.
      *
      * @return void
      */
@@ -132,7 +132,7 @@ class TestLaravelGracenoteUsage extends TestCase
         $gracenote = new \Atomescrochus\Gracenote\Gracenote();
         $gracenote->searchType('track_title');
         $gracenote->query('poker face');
-        $cache_key = "track_title-poker face";
+        $cache_key = 'track_title-poker face';
         $gracenote->search();
 
         $this->assertTrue(Cache::has($cache_key));
