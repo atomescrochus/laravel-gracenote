@@ -2,6 +2,23 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## Unreleased - YYYY-MM-DD
+
+### Added
+- Note in comments for the artisan command to get user_id;
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Nothing
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
 ## 1.0.0 - 2016-12-19
 
 ### Added

@@ -9,7 +9,8 @@ return [
     'client_tag' => env('GRACENOTE_CLIENT_TAG'),
 
     /*
-     * You will have to get it by yourself, for now.
+     * If you don't have it, you can add the above values to your environment file,
+     * then run ` php artisan gracenote:user-id` to get the required value of this property.
      */
     'user_id' => env('GRACENOTE_USER_ID'),
 
