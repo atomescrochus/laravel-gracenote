@@ -49,7 +49,7 @@ class GracenoteServiceProvider extends ServiceProvider
 
     private function registerSkeleton()
     {
-        $this->app->bind('gracenote', function () {
+        $this->app->bind('gracenote', function() {
             return new Gracenote();
         });
     }
