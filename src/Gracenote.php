@@ -205,6 +205,29 @@ class Gracenote
                 })->toArray();
             }
 
+            if (isset($item->ARTIST_ORIGIN[0])) {
+                $formatted->artist_origin = $item->ARTIST_ORIGIN[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST_TYPE[0])) {
+                $formatted->artist_type = $item->ARTIST_TYPE[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST_ERA[0])) {
+                $formatted->artist_era = $item->ARTIST_ERA[0]->VALUE;
+            }
+
+            if (isset($item->URL)) {
+                foreach ($item->URL as $image) {
+                    $formatted->{strtolower($image->TYPE)} = (object) [
+                        'size' => strtolower($image->SIZE),
+                        'width' => $image->WIDTH,
+                        'height' => $image->HEIGHT,
+                        'url' => $image->VALUE
+                    ];
+                }
+            }
+
             return $formatted;
         });
     }
@@ -261,6 +284,29 @@ class Gracenote
                 })->toArray();
             }
 
+            if (isset($item->ARTIST_ORIGIN[0])) {
+                $formatted->artist_origin = $item->ARTIST_ORIGIN[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST_TYPE[0])) {
+                $formatted->artist_type = $item->ARTIST_TYPE[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST_ERA[0])) {
+                $formatted->artist_era = $item->ARTIST_ERA[0]->VALUE;
+            }
+
+            if (isset($item->URL)) {
+                foreach ($item->URL as $image) {
+                    $formatted->{strtolower($image->TYPE)} = (object) [
+                        'size' => strtolower($image->SIZE),
+                        'width' => $image->WIDTH,
+                        'height' => $image->HEIGHT,
+                        'url' => $image->VALUE
+                    ];
+                }
+            }
+
             return $formatted;
         });
     }
@@ -300,6 +346,29 @@ class Gracenote
 
             if (isset($item->TRACK[0]->TITLE)) {
                 $formatted->track_title = $item->TRACK[0]->TITLE[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST_ORIGIN[0])) {
+                $formatted->artist_origin = $item->ARTIST_ORIGIN[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST_TYPE[0])) {
+                $formatted->artist_type = $item->ARTIST_TYPE[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST_ERA[0])) {
+                $formatted->artist_era = $item->ARTIST_ERA[0]->VALUE;
+            }
+
+            if (isset($item->URL)) {
+                foreach ($item->URL as $image) {
+                    $formatted->{strtolower($image->TYPE)} = (object) [
+                        'size' => strtolower($image->SIZE),
+                        'width' => $image->WIDTH,
+                        'height' => $image->HEIGHT,
+                        'url' => $image->VALUE
+                    ];
+                }
             }
 
             return $formatted;

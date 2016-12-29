@@ -6,18 +6,8 @@ All Notable changes to `atomescrochus/laravel-gracenote` will be documented in t
 
 ### Added
 - Possibility to set the search mode;
-
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
+- Results now includes artists origin, type (sex) and era, when available and if search mode is set;
+- Results now includes images (artist image and covertart), when available and if search mode is set;
 
 ## 1.1.1 - 2016-12-27
 
