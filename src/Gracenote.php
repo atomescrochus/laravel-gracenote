@@ -48,7 +48,7 @@ class Gracenote
     }
 
     /**
-     * Set the search mode
+     * Set the search mode.
      * @param  string $type One of the search mode as defined by Gracenote API docs.
      */
     public function searchMode($mode)
@@ -109,7 +109,7 @@ class Gracenote
             throw MissingRequiredParameters::searchTerms();
         }
 
-        $mode = $this->search_mode != "" ? $this->search_mode : "no-search-mode";
+        $mode = $this->search_mode != '' ? $this->search_mode : 'no-search-mode';
         $results = Cache::remember("{$mode}-{$this->search_type}-{$this->search_terms}", $this->cache, function () {
             return $this->searchGracenote();
         });
@@ -223,7 +223,7 @@ class Gracenote
                         'size' => strtolower($image->SIZE),
                         'width' => $image->WIDTH,
                         'height' => $image->HEIGHT,
-                        'url' => $image->VALUE
+                        'url' => $image->VALUE,
                     ];
                 }
             }
@@ -302,7 +302,7 @@ class Gracenote
                         'size' => strtolower($image->SIZE),
                         'width' => $image->WIDTH,
                         'height' => $image->HEIGHT,
-                        'url' => $image->VALUE
+                        'url' => $image->VALUE,
                     ];
                 }
             }
@@ -366,7 +366,7 @@ class Gracenote
                         'size' => strtolower($image->SIZE),
                         'width' => $image->WIDTH,
                         'height' => $image->HEIGHT,
-                        'url' => $image->VALUE
+                        'url' => $image->VALUE,
                     ];
                 }
             }
