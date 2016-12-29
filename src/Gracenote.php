@@ -2,10 +2,10 @@
 
 namespace Atomescrochus\Gracenote;
 
-use Illuminate\Support\Facades\Cache;
-use Atomescrochus\Gracenote\Exceptions\UsageErrors;
-use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
 use Atomescrochus\Gracenote\Exceptions\MissingRequiredParameters;
+use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
+use Atomescrochus\Gracenote\Exceptions\UsageErrors;
+use Illuminate\Support\Facades\Cache;
 
 class Gracenote
 {
@@ -53,7 +53,7 @@ class Gracenote
      */
     public function searchMode($mode)
     {
-        if (! in_array($mode, $this->possible_search_modes)) {
+        if (!in_array($mode, $this->possible_search_modes)) {
             throw UsageErrors::searchMode();
         }
 
@@ -68,7 +68,7 @@ class Gracenote
      */
     public function searchType($type)
     {
-        if (! in_array($type, $this->possible_search_types)) {
+        if (!in_array($type, $this->possible_search_types)) {
             throw UsageErrors::searchType();
         }
 
@@ -155,7 +155,7 @@ class Gracenote
 
     private function formatSearchArtist($raw_albums)
     {
-        return collect($raw_albums)->map(function ($item, $key) {
+        return collect($raw_albums)->map(function($item, $key) {
             $formatted = (object) [];
 
             if (isset($item->GN_ID)) {
@@ -183,7 +183,7 @@ class Gracenote
             }
 
             if (isset($item->TRACK)) {
-                $formatted->tracks = collect($item->TRACK)->map(function ($item, $key) {
+                $formatted->tracks = collect($item->TRACK)->map(function($item, $key) {
                     $formatted = (object) [];
                     if (isset($item->TRACK_NUM)) {
                         $formatted->track_number = $item->TRACK_NUM;
@@ -234,7 +234,7 @@ class Gracenote
 
     private function formatSearchAlbumTitle($raw_albums)
     {
-        return collect($raw_albums)->map(function ($item, $key) {
+        return collect($raw_albums)->map(function($item, $key) {
             $formatted = (object) [];
 
             if (isset($item->GN_ID)) {
@@ -262,7 +262,7 @@ class Gracenote
             }
 
             if (isset($item->TRACK)) {
-                $formatted->tracks = collect($item->TRACK)->map(function ($item, $key) {
+                $formatted->tracks = collect($item->TRACK)->map(function($item, $key) {
                     $formatted = (object) [];
                     if (isset($item->TRACK_NUM)) {
                         $formatted->track_number = $item->TRACK_NUM;
@@ -313,7 +313,7 @@ class Gracenote
 
     private function formatSearchTrackTitle($raw_albums)
     {
-        return collect($raw_albums)->map(function ($item, $key) {
+        return collect($raw_albums)->map(function($item, $key) {
             $formatted = (object) [];
 
             if (isset($item->GN_ID)) {
