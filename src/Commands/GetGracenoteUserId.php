@@ -2,8 +2,8 @@
 
 namespace Atomescrochus\Gracenote\Commands;
 
-use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
 use Illuminate\Console\Command;
+use Atomescrochus\Gracenote\Exceptions\RequiredConfigMissing;
 
 class GetGracenoteUserId extends Command
 {
@@ -64,7 +64,7 @@ class GetGracenoteUserId extends Command
         ->body($payload)
         ->sendsXml()
         ->send();
-        if (!$response) {
+        if (! $response) {
             $this->error('Something went wrong.');
         }
 
