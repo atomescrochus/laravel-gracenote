@@ -10,4 +10,9 @@ class UsageErrors extends Exception
     {
         return new static('This search type is invalid.');
     }
+
+    public static function searchMode()
+    {
+        return new static('This search type is invalid. Options are SINGLE_BEST or SINGLE_BEST_COVER.');
+    }
 }

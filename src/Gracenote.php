@@ -17,9 +17,11 @@ class Gracenote
     public $query_cmd;
     public $lang;
     public $search_type;
+    public $search_mode;
     public $search_terms;
     public $cache;
     public $possible_search_types;
+    public $possible_search_modes;
 
     public function __construct()
     {
@@ -29,7 +31,9 @@ class Gracenote
         $this->search_terms = null;
         $this->query_cmd = 'album_search'; // curently only possible option.
         $this->search_type = 'TRACK_TITLE';
+        $this->search_mode = '';
         $this->possible_search_types = ['track_title', 'album_title', 'artist'];
+        $this->possible_search_modes = ['SINGLE_BEST', 'SINGLE_BEST_COVER'];
     }
 
     /**
@@ -39,6 +43,21 @@ class Gracenote
     public function cache(int $cache)
     {
         $this->cache = $cache;
+
+        return $this;
+    }
+
+    /**
+     * Set the search mode
+     * @param  string $type One of the search mode as defined by Gracenote API docs.
+     */
+    public function searchMode($mode)
+    {
+        if (! in_array($mode, $this->possible_search_modes)) {
+            throw UsageErrors::searchMode();
+        }
+
+        $this->search_mode = "<MODE>{$mode}</MODE>";
 
         return $this;
     }
@@ -90,7 +109,8 @@ class Gracenote
             throw MissingRequiredParameters::searchTerms();
         }
 
-        $results = Cache::remember("{$this->search_type}-{$this->search_terms}", $this->cache, function () {
+        $mode = $this->search_mode != "" ? $this->search_mode : "no-search-mode";
+        $results = Cache::remember("{$mode}-{$this->search_type}-{$this->search_terms}", $this->cache, function () {
             return $this->searchGracenote();
         });
 
@@ -294,7 +314,8 @@ class Gracenote
         $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
         $auth = "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
         $search = '<TEXT TYPE="'.strtoupper($this->search_type).'">'.$this->search_terms.'</TEXT>';
-        $query = '<QUERY CMD="'.$this->query_cmd.'">'.$search.'</QUERY>';
+        $options = '<OPTION><PARAMETER>SELECT_EXTENDED</PARAMETER><VALUE>COVER,REVIEW,ARTIST_BIOGRAPHY,ARTIST_IMAGE,ARTIST_OET,MOOD,TEMPO</VALUE></OPTION>';
+        $query = '<QUERY CMD="'.$this->query_cmd.'">'.$this->search_mode.$search.$options.'</QUERY>';
         $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>";
 
         return $payload;

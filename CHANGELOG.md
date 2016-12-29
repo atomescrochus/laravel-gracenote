@@ -2,6 +2,23 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## Unreleased - YYYY-MM-DD
+
+### Added
+- Possibility to set the search mode;
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Nothing
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
 ## 1.1.1 - 2016-12-27
 
 ### Fixed

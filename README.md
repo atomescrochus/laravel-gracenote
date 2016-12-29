@@ -54,6 +54,7 @@ GRACENOTE_USER_ID=wxyz-9876
 // $results will be an object containing a collection of results and raw response data from Gracenote
 $results = GracenoteAPI::lang('eng') // natural language of metadata
     ->cache(120) // integer representing minutes to cache results for
+    ->searchMode('single_best') // OPTIONAL. Can be 'single_best' or 'single_best_cover'
     ->searchType('track_title') //either 'track_title', 'album_title', or 'artist'
     ->query('Poker face') // the search query
     ->search(); // do some magic
