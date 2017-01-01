@@ -52,12 +52,22 @@ GRACENOTE_USER_ID=wxyz-9876
 
 ``` php
 // $results will be an object containing a collection of results and raw response data from Gracenote
+
+// here is an example query to search in the Gracenote database
 $results = GracenoteAPI::lang('eng') // natural language of metadata
     ->cache(120) // integer representing minutes to cache results for
     ->searchMode('single_best') // OPTIONAL. Can be 'single_best' or 'single_best_cover'
     ->searchType('track_title') //either 'track_title', 'album_title', or 'artist'
     ->query('Poker face') // the search query
     ->search(); // do some magic
+
+// if you happen to have a gracenote id, you can search for it in this fashion
+// you need not to set other options, it is all set by default to be sure the search by ID
+// won't fail on Gracenote's part.
+$results = GracenoteAPI::lang('eng') // natural language of metadata
+    ->cache(120) // integer representing minutes to cache results for
+    ->getTrackById('167695000-B4D3EE5FF9011CCFCF0296FF1D8E8131');
+```
 ```
 
 ## Tests

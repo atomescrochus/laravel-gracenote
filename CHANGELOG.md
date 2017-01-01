@@ -2,7 +2,14 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
-## 1.2.0 - 2016-12-29
+## 1.3.0 - 2017-01-01
+
+A.K.A the I have not life, so I'm not hungover release.
+
+### Added
+- Possibility to search by ID with `getTrackById()`;
+
+## 1.2.0 - 2016-12-13
 
 ### Added
 - Possibility to set the search mode;

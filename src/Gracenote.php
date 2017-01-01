@@ -20,6 +20,7 @@ class Gracenote
     public $search_mode;
     public $search_terms;
     public $cache;
+    public $options;
     public $possible_search_types;
     public $possible_search_modes;
 
@@ -29,11 +30,12 @@ class Gracenote
 
         $this->lang = 'eng';
         $this->search_terms = null;
-        $this->query_cmd = 'album_search'; // curently only possible option.
+        $this->query_cmd = 'album_search'; // default
         $this->search_type = 'TRACK_TITLE';
         $this->search_mode = '';
         $this->possible_search_types = ['track_title', 'album_title', 'artist'];
         $this->possible_search_modes = ['SINGLE_BEST', 'SINGLE_BEST_COVER'];
+        $this->options = '<OPTION><PARAMETER>SELECT_EXTENDED</PARAMETER><VALUE>COVER,REVIEW,ARTIST_BIOGRAPHY,ARTIST_IMAGE,ARTIST_OET,MOOD,TEMPO</VALUE></OPTION>';
     }
 
     /**
@@ -45,6 +47,22 @@ class Gracenote
         $this->cache = $cache;
 
         return $this;
+    }
+
+    public function getTrackById($id)
+    {
+        // need refacotring into everything else.
+        $this->query_cmd = "ALBUM_FETCH";
+        $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
+        $auth = "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
+        $query = '<QUERY CMD="'.$this->query_cmd.'"><GN_ID>'.$id.'</GN_ID></QUERY>';
+        $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>";
+
+        $result = Cache::remember("gn_track_id-{$id}", $this->cache, function () use ($payload) {
+            return $this->searchGracenote($payload);
+        });
+
+        return $result;
     }
 
     /**
@@ -121,10 +139,11 @@ class Gracenote
      * Send a request for search to Gracenote WebAPI.
      * @return collection A collection of results
      */
-    private function searchGracenote()
+    private function searchGracenote($payload = null)
     {
+        $payload = is_null($payload) ? $this->xmlPayload() : $payload;
         $response = \Httpful\Request::post($this->request_url)
-        ->body($this->xmlPayload())
+        ->body($payload)
         ->sendsXml()
         ->send();
 
@@ -133,7 +152,12 @@ class Gracenote
 
     private function formatApiResults($results)
     {
+        
         $raw = $results->raw_body;
+
+        if ($this->query_cmd == 'ALBUM_FETCH') {
+            $albums = $this->formatSearchTrackById($results->body->RESPONSE[0]->ALBUM);
+        }
 
         if ($this->search_type == 'track_title') {
             $albums = $this->formatSearchTrackTitle($results->body->RESPONSE[0]->ALBUM);
@@ -151,6 +175,58 @@ class Gracenote
             'results' => $albums,
             'raw' => json_decode($raw),
         ];
+    }
+
+    private function formatSearchTrackById($raw_albums)
+    {
+        return collect($raw_albums)->map(function ($item, $key) {
+            $formatted = (object) [];
+
+            if (isset($item->GN_ID)) {
+                $formatted->gracenote_album_id = $item->GN_ID;
+            }
+
+            if (isset($item->TITLE[0]->VALUE)) {
+                $formatted->album_title = $item->TITLE[0]->VALUE;
+            }
+
+            if (isset($item->ARTIST[0]->VALUE)) {
+                $formatted->album_artist = $item->ARTIST[0]->VALUE;
+            }
+
+            if (isset($item->GENRE[0]->VALUE)) {
+                $formatted->album_genre = $item->GENRE[0]->VALUE;
+            }
+
+            if (isset($item->DATE[0]->VALUE)) {
+                $formatted->album_year = $item->DATE[0]->VALUE;
+            }
+
+            if (isset($item->TRACK_COUNT)) {
+                $formatted->track_count = $item->TRACK_COUNT;
+            }
+
+            if (isset($item->TRACK)) {
+                $formatted->tracks = collect($item->TRACK)->map(function ($item, $key) {
+                    $formatted = (object) [];
+                    if (isset($item->TRACK_NUM)) {
+                        $formatted->track_number = $item->TRACK_NUM;
+                    }
+
+                    if (isset($item->GN_ID)) {
+                        $formatted->gracenote_track_id = $item->GN_ID;
+                    }
+
+                    if (isset($item->TITLE[0]->VALUE)) {
+                        $formatted->title = $item->TITLE[0]->VALUE;
+                    }
+
+                    return $formatted;
+                })->toArray();
+            }
+
+            return $formatted;
+        });
     }
 
     private function formatSearchArtist($raw_albums)
@@ -383,8 +459,7 @@ class Gracenote
         $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
         $auth = "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
         $search = '<TEXT TYPE="'.strtoupper($this->search_type).'">'.$this->search_terms.'</TEXT>';
-        $options = '<OPTION><PARAMETER>SELECT_EXTENDED</PARAMETER><VALUE>COVER,REVIEW,ARTIST_BIOGRAPHY,ARTIST_IMAGE,ARTIST_OET,MOOD,TEMPO</VALUE></OPTION>';
-        $query = '<QUERY CMD="'.$this->query_cmd.'">'.$this->search_mode.$search.$options.'</QUERY>';
+        $query = '<QUERY CMD="'.$this->query_cmd.'">'.$this->search_mode.$search.$this->options.'</QUERY>';
         $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>";
 
         return $payload;
