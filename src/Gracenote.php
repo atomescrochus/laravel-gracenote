@@ -52,7 +52,7 @@ class Gracenote
     public function getTrackById($id)
     {
         // need refacotring into everything else.
-        $this->query_cmd = "ALBUM_FETCH";
+        $this->query_cmd = 'ALBUM_FETCH';
         $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
         $auth = "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
         $query = '<QUERY CMD="'.$this->query_cmd.'"><GN_ID>'.$id.'</GN_ID></QUERY>';
@@ -152,7 +152,6 @@ class Gracenote
 
     private function formatApiResults($results)
     {
-        
         $raw = $results->raw_body;
 
         if ($this->query_cmd == 'ALBUM_FETCH') {
