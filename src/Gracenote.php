@@ -153,6 +153,14 @@ class Gracenote
     private function formatApiResults($results)
     {
         $raw = $results->raw_body;
+        $status = $results->body->RESPONSE[0]->STATUS ? $results->body->RESPONSE[0]->STATUS : null;
+
+        if ($status != "OK") {
+            return (object) [
+                'status' => $status,
+                'raw' => json_decode($raw),
+            ];
+        }
 
         if ($this->query_cmd == 'ALBUM_FETCH') {
             $albums = $this->formatSearchTrackById($results->body->RESPONSE[0]->ALBUM);
@@ -171,6 +179,7 @@ class Gracenote
         }
 
         return (object) [
+            'status' => $status,
             'results' => $albums,
             'raw' => json_decode($raw),
         ];

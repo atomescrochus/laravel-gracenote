@@ -2,6 +2,11 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## 1.3.1 - 2017-01-02
+
+### Added
+- Results now include a `status` field containing the status text returned by Gracenote Web API.
+
 ## 1.3.0 - 2017-01-01
 
 A.K.A the I have not life, so I'm not hungover release.
