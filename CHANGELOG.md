@@ -2,6 +2,10 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+## 1.3.2 - 2017-01-12
+### Added
+- Cache names are now hashed
+
 ## 1.3.1 - 2017-01-02
 
 ### Added

@@ -68,7 +68,6 @@ $results = GracenoteAPI::lang('eng') // natural language of metadata
     ->cache(120) // integer representing minutes to cache results for
     ->getTrackById('167695000-B4D3EE5FF9011CCFCF0296FF1D8E8131');
 ```
-```
 
 ## Tests
 
