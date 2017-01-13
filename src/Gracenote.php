@@ -58,7 +58,7 @@ class Gracenote
         $query = '<QUERY CMD="'.$this->query_cmd.'"><GN_ID>'.$id.'</GN_ID></QUERY>';
         $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>";
 
-        $cache_name = bcrypt("gn_track_id-{$id}");
+        $cache_name = md5("gn_track_id-{$id}");
 
         $result = Cache::remember($cache_name, $this->cache, function () use ($payload) {
             return $this->searchGracenote($payload);
@@ -131,7 +131,7 @@ class Gracenote
 
         $mode = $this->search_mode != '' ? $this->search_mode : 'no-search-mode';
 
-        $cache_name = bcrypt("{$mode}-{$this->search_type}-{$this->search_terms}");
+        $cache_name = md5("{$mode}-{$this->search_type}-{$this->search_terms}");
         
         $results = Cache::remember($cache_name, $this->cache, function () {
             return $this->searchGracenote();
