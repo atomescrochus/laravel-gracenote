@@ -2,6 +2,10 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+# 1.3.4 - 2017-01-13
+## Added
+- Optimizing cache usage vs API request
+
 # 1.3.3 - 2017-01-13
 ## Added
 - Named object is md5-ed

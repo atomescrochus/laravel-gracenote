@@ -132,12 +132,15 @@ class Gracenote
         $mode = $this->search_mode != '' ? $this->search_mode : 'no-search-mode';
 
         $cache_name = md5("{$mode}-{$this->search_type}-{$this->search_terms}");
+        $cached_response = Cache::has($cache_name);
+
+        if ($cached_response) {
+            return Cache::get($cache_name);
+        }
         
-        $results = Cache::remember($cache_name, $this->cache, function () {
+        return Cache::remember($cache_name, $this->cache, function () {
             return $this->searchGracenote();
         });
-
-        return $results;
     }
 
     /**
