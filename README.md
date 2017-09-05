@@ -6,7 +6,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/atomescrochus/laravel-gracenote/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/atomescrochus/laravel-gracenote/?branch=master)
 [![Total Downloads](https://poser.pugx.org/atomescrochus/laravel-gracenote/downloads)](https://packagist.org/packages/atomescrochus/laravel-gracenote)
 
-The `atomescrochus/laravel-gracenote` package provide and easy way to interact with the Gracenote Web API from any Laravel 5.3 application.
+The `atomescrochus/laravel-gracenote` package provide and easy way to interact with the Gracenote Web API from any Laravel 5.* application.
 
 This package is usable in production, but should still be considered a work in progress (contribution welcomed!). It required PHP >= `7.0`.
 
@@ -18,7 +18,7 @@ You can install this package via composer:
 $ composer require atomescrochus/laravel-gracenote
 ```
 
-Then you have to install the package' service provider and alias:
+Then you have to install the package' service provider and alias, _unless you are running Laravel >=5.5_, then the package will auto discover itself:
 
 ```php
 // config/app.php
@@ -51,6 +51,7 @@ GRACENOTE_USER_ID=wxyz-9876
 ## Usage
 
 ``` php
+use Atomescrochus\Gracenote\Facades\Gracenote as GracenoteAPI;
 // $results will be an object containing a collection of results and raw response data from Gracenote
 
 // here is an example query to search in the Gracenote database

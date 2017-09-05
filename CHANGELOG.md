@@ -2,6 +2,13 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+# 1.4.0 - 2017-09-05
+## Added
+- Package autodiscovery for Laravel >=5.5
+
+## Fixed
+- Can now pass search mode as lower case
+
 # 1.3.4 - 2017-01-13
 ## Added
 - Optimizing cache usage vs API request
