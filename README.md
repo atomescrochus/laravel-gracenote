@@ -18,7 +18,7 @@ You can install this package via composer:
 $ composer require atomescrochus/laravel-gracenote
 ```
 
-Then you have to install the package' service provider and alias:
+Then you have to install the package' service provider and alias, _unless you are running Laravel >=5.5_, then the package will auto discover itself:
 
 ```php
 // config/app.php
@@ -51,6 +51,7 @@ GRACENOTE_USER_ID=wxyz-9876
 ## Usage
 
 ``` php
+use Atomescrochus\Gracenote\Facades\Gracenote as GracenoteAPI;
 // $results will be an object containing a collection of results and raw response data from Gracenote
 
 // here is an example query to search in the Gracenote database
