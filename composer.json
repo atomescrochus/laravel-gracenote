@@ -36,11 +36,6 @@
             "Atomescrochus\\Gracenote\\Tests\\": "tests"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "master"
-        }
-    },
     "config": {
         "sort-packages": true
     },
