@@ -73,6 +73,8 @@ class Gracenote
      */
     public function searchMode($mode)
     {
+        $mode = strtoupper($mode);
+        
         if (! in_array($mode, $this->possible_search_modes)) {
             throw UsageErrors::searchMode();
         }
