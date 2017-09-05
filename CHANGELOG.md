@@ -2,6 +2,7 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
+# 1.4.0 - 2017-09-05
 ## Added
 - Package autodiscovery for Laravel >=5.5
 
