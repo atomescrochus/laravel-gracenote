@@ -210,10 +210,12 @@ class Gracenote
 
             if (isset($item->ARTIST[0]->VALUE)) {
                 $formatted->album_artist = $item->ARTIST[0]->VALUE;
+                $formatted->album_artists = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST);
             }
 
             if (isset($item->GENRE[0]->VALUE)) {
                 $formatted->album_genre = $item->GENRE[0]->VALUE;
+                $formatted->album_genres = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->GENRE);
             }
 
             if (isset($item->DATE[0]->VALUE)) {
@@ -262,10 +264,12 @@ class Gracenote
 
             if (isset($item->ARTIST[0]->VALUE)) {
                 $formatted->album_artist = $item->ARTIST[0]->VALUE;
+                $formatted->album_artists = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST);
             }
 
             if (isset($item->GENRE[0]->VALUE)) {
                 $formatted->album_genre = $item->GENRE[0]->VALUE;
+                $formatted->album_genres = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->GENRE);
             }
 
             if (isset($item->DATE[0]->VALUE)) {
@@ -301,14 +305,17 @@ class Gracenote
 
             if (isset($item->ARTIST_ORIGIN[0])) {
                 $formatted->artist_origin = $item->ARTIST_ORIGIN[0]->VALUE;
+                $formatted->artist_origins = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_ORIGIN);
             }
 
             if (isset($item->ARTIST_TYPE[0])) {
                 $formatted->artist_type = $item->ARTIST_TYPE[0]->VALUE;
+                $formatted->artist_types = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_TYPE);
             }
 
             if (isset($item->ARTIST_ERA[0])) {
                 $formatted->artist_era = $item->ARTIST_ERA[0]->VALUE;
+                $formatted->artist_eras = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_ERA);
             }
 
             if (isset($item->URL)) {
@@ -341,10 +348,12 @@ class Gracenote
 
             if (isset($item->ARTIST[0]->VALUE)) {
                 $formatted->album_artist = $item->ARTIST[0]->VALUE;
+                $formatted->album_artists = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST);
             }
 
             if (isset($item->GENRE[0]->VALUE)) {
                 $formatted->album_genre = $item->GENRE[0]->VALUE;
+                $formatted->album_genres = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->GENRE);
             }
 
             if (isset($item->DATE[0]->VALUE)) {
@@ -380,14 +389,17 @@ class Gracenote
 
             if (isset($item->ARTIST_ORIGIN[0])) {
                 $formatted->artist_origin = $item->ARTIST_ORIGIN[0]->VALUE;
+                $formatted->artist_origins = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_ORIGIN);
             }
 
             if (isset($item->ARTIST_TYPE[0])) {
                 $formatted->artist_type = $item->ARTIST_TYPE[0]->VALUE;
+                $formatted->artist_types = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_TYPE);
             }
 
             if (isset($item->ARTIST_ERA[0])) {
                 $formatted->artist_era = $item->ARTIST_ERA[0]->VALUE;
+                $formatted->artist_eras = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_ERA);
             }
 
             if (isset($item->URL)) {
@@ -420,10 +432,12 @@ class Gracenote
 
             if (isset($item->ARTIST[0]->VALUE)) {
                 $formatted->album_artist = $item->ARTIST[0]->VALUE;
+                $formatted->album_artists = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST);
             }
 
             if (isset($item->GENRE[0]->VALUE)) {
                 $formatted->album_genre = $item->GENRE[0]->VALUE;
+                $formatted->album_genres = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->GENRE);
             }
 
             if (isset($item->DATE[0]->VALUE)) {
@@ -444,14 +458,17 @@ class Gracenote
 
             if (isset($item->ARTIST_ORIGIN[0])) {
                 $formatted->artist_origin = $item->ARTIST_ORIGIN[0]->VALUE;
+                $formatted->artist_origins = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_ORIGIN);
             }
 
             if (isset($item->ARTIST_TYPE[0])) {
                 $formatted->artist_type = $item->ARTIST_TYPE[0]->VALUE;
+                $formatted->artist_types = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_TYPE);
             }
 
             if (isset($item->ARTIST_ERA[0])) {
                 $formatted->artist_era = $item->ARTIST_ERA[0]->VALUE;
+                $formatted->artist_eras = array_map(function ($v) { return array_get($v, 'VALUE'); }, $item->ARTIST_ERA);
             }
 
             if (isset($item->URL)) {
