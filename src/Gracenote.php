@@ -53,7 +53,7 @@ class Gracenote
     {
         // need refacotring into everything else.
         $this->query_cmd = 'ALBUM_FETCH';
-        $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
+        $lang = "<LANG>" . strtoupper($this->lang) . "</LANG>";
         $auth = "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
         $query = '<QUERY CMD="'.$this->query_cmd.'"><GN_ID>'.$id.'</GN_ID></QUERY>';
         $payload = "<QUERIES>{$lang}{$auth}{$query}</QUERIES>";
@@ -491,7 +491,7 @@ class Gracenote
      */
     private function xmlPayload()
     {
-        $lang = "<LANG>{strtoupper($this->lang)}</LANG>";
+        $lang = "<LANG>" . strtoupper($this->lang) . "</LANG>";
         $auth = "<AUTH><CLIENT>{$this->client_id}-{$this->client_tag}</CLIENT><USER>{$this->user_id}</USER></AUTH>";
         $search = '<TEXT TYPE="'.strtoupper($this->search_type).'">'.$this->search_terms.'</TEXT>';
         $query = '<QUERY CMD="'.$this->query_cmd.'">'.$this->search_mode.$search.$this->options.'</QUERY>';
