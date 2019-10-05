@@ -2,7 +2,7 @@
 
 All Notable changes to `atomescrochus/laravel-gracenote` will be documented in this file following SemVer.
 
-# Next
+# 1.5.0 (2019-10-05)
 ## Fixed
 - [This PR from @katsuren](https://github.com/atomescrochus/laravel-gracenote/pull/16) helps into getting return multiple from Gracenote.
 - [This PR from @katsuren](https://github.com/atomescrochus/laravel-gracenote/pull/17) tries to make setting the language working better on more recent version of PHP.
